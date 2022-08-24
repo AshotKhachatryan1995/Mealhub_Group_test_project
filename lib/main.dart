@@ -1,5 +1,8 @@
 import 'package:Mealhub_Group_test_project/blocs/navigation_bloc/navigation_bloc.dart';
+import 'package:Mealhub_Group_test_project/blocs/navigation_bloc/navigation_event.dart';
 import 'package:Mealhub_Group_test_project/blocs/navigation_bloc/navigation_state.dart';
+import 'package:Mealhub_Group_test_project/screens/home_screen.dart';
+import 'package:Mealhub_Group_test_project/screens/loading_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -18,10 +21,16 @@ class _MyAppState extends State<MyApp> {
   late final NavigationBloc _navigationBloc;
 
   @override
+  void dispose() {
+    _navigationBloc.close();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return BlocProvider<NavigationBloc>(
         create: (_) {
-          _navigationBloc = NavigationBloc();
+          _navigationBloc = NavigationBloc()..add(AppStartedEvent());
 
           return _navigationBloc;
         },
@@ -42,19 +51,21 @@ class MyRouterDelegate extends RouterDelegate
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<NavigationBloc, NavigationState>(
-      builder: (context, authenticationState) {
+      builder: (context, navigationState) {
+        print(navigationState);
+
         return Navigator(
             key: navigatorKey,
             pages: [
-              MaterialPage(
-                key: const ValueKey('MyConnectionPage'),
-                child: MyConnexionWidget(),
+              const MaterialPage(
+                key: ValueKey('LoadingScreen'),
+                child: LoadingScreen(),
               ),
-              // if (authenticationState is AuthenticatedState)
-              //   MaterialPage(
-              //     key: ValueKey('MyHomePage'),
-              //     child: MyHomeWidget(),
-              //   ),
+              if (navigationState is AuthenticatedState)
+                const MaterialPage(
+                  key: ValueKey('HomeScreen'),
+                  child: HomeScreen(),
+                ),
             ],
             onPopPage: (route, result) => route.didPop(result));
       },

@@ -10,5 +10,6 @@ class NavigationBloc extends Bloc<NavigationEvent, NavigationState> {
   Future<void> _onAppStartedEvent(
       AppStartedEvent event, Emitter<NavigationState> emit) async {
     emit(LoadingState());
+    emit(AuthenticatedState());
   }
 }

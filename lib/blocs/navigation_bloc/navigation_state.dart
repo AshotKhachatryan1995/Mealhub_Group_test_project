@@ -16,3 +16,8 @@ class LoadingState extends NavigationState {
   @override
   List<Object?> get props => [];
 }
+
+class AuthenticatedState extends NavigationState {
+  @override
+  List<Object?> get props => [];
+}
