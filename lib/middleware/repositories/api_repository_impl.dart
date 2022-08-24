@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 
 class ApiRepositoryImpl implements ApiRepository {
   @override
-  void getPhotos() {}
+  Future<dynamic> getPhotos() async {}
 
   @override
   Future<dynamic> getPosts() async {
@@ -15,5 +15,5 @@ class ApiRepositoryImpl implements ApiRepository {
   }
 
   @override
-  void getUser() {}
+  Future<dynamic> getUser() async {}
 }
