@@ -1,5 +1,5 @@
-import 'package:Mealhub_Group_test_project/middleware/models/address.dart';
-import 'package:Mealhub_Group_test_project/middleware/models/company.dart';
+import 'package:mealhub_group_test_project/middleware/models/address.dart';
+import 'package:mealhub_group_test_project/middleware/models/company.dart';
 import 'package:json_annotation/json_annotation.dart';
 part 'user.g.dart';
 

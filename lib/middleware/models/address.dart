@@ -1,4 +1,4 @@
-import 'package:Mealhub_Group_test_project/middleware/models/geo.dart';
+import 'package:mealhub_group_test_project/middleware/models/geo.dart';
 import 'package:json_annotation/json_annotation.dart';
 part 'address.g.dart';
 

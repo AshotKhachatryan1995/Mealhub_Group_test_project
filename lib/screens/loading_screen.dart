@@ -5,9 +5,12 @@ class LoadingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      backgroundColor: Colors.white,
-      body: Center(child: Icon(Icons.logo_dev)),
-    );
+    return Scaffold(
+        backgroundColor: Colors.white,
+        body: Center(
+          child: AspectRatio(
+              aspectRatio: 20 / 9,
+              child: Center(child: Image.asset('assets/icons/logo.png'))),
+        ));
   }
 }

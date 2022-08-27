@@ -1,4 +1,4 @@
-name: Mealhub_Group_test_project
+name: mealhub_group_test_project
 description: A new Flutter project.
 
 # The following line prevents the package from being accidentally published to
@@ -38,6 +38,9 @@ dependencies:
   equatable: ^2.0.5
   json_serializable: ^6.3.1
   http: ^0.13.5
+  provider: ^6.0.3
+  json_annotation: ^4.6.0
+  flutter_image_slideshow: ^0.1.4
 
 dev_dependencies:
   flutter_test:
@@ -63,9 +66,8 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
-  #   - images/a_dot_ham.jpeg
+  assets:
+    - assets/icons/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

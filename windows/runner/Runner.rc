@@ -90,12 +90,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "com.example" "\0"
-            VALUE "FileDescription", "Mealhub_Group_test_project" "\0"
+            VALUE "FileDescription", "mealhub_group_test_project" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "Mealhub_Group_test_project" "\0"
+            VALUE "InternalName", "mealhub_group_test_project" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2022 com.example. All rights reserved." "\0"
-            VALUE "OriginalFilename", "Mealhub_Group_test_project.exe" "\0"
-            VALUE "ProductName", "Mealhub_Group_test_project" "\0"
+            VALUE "OriginalFilename", "mealhub_group_test_project.exe" "\0"
+            VALUE "ProductName", "mealhub_group_test_project" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

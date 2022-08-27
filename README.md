@@ -1,4 +1,4 @@
-# Mealhub_Group_test_project
+# mealhub_group_test_project
 
 A new Flutter project.
 

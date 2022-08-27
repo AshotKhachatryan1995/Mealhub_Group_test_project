@@ -1,9 +1,10 @@
 import 'dart:convert';
 
-import 'package:Mealhub_Group_test_project/middleware/constants/app_urls.dart';
-import 'package:Mealhub_Group_test_project/middleware/models/api_error_model.dart';
-import 'package:Mealhub_Group_test_project/middleware/models/post.dart';
-import 'package:Mealhub_Group_test_project/middleware/repositories/api_repository.dart';
+import 'package:mealhub_group_test_project/middleware/constants/app_urls.dart';
+import 'package:mealhub_group_test_project/middleware/models/api_error_model.dart';
+import 'package:mealhub_group_test_project/middleware/models/post.dart';
+import 'package:mealhub_group_test_project/middleware/models/user.dart';
+import 'package:mealhub_group_test_project/middleware/repositories/api_repository.dart';
 import 'package:http/http.dart' as http;
 
 class ApiRepositoryImpl implements ApiRepository {
@@ -31,5 +32,21 @@ class ApiRepositoryImpl implements ApiRepository {
   }
 
   @override
-  Future<dynamic> getUser() async {}
+  Future<dynamic> getUser() async {
+    try {
+      final response =
+          await http.get(Uri.parse(AppUrls.baseUrl + AppUrls.usersUrl));
+      if (response.statusCode == 200) {
+        final result = jsonDecode(response.body);
+        final user = User.fromJson(result);
+
+        return user;
+      } else {
+        return ApiErrorModel(
+            errorCode: response.statusCode, errorMessage: response.toString());
+      }
+    } catch (e) {
+      return ApiErrorModel(errorCode: 400, errorMessage: e.toString());
+    }
+  }
 }
