@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'package:mealhub_group_test_project/middleware/models/photo.dart';
+import 'package:users_list_with_details_and_carousel/middleware/models/photo.dart';
 
 import '../constants/app_urls.dart';
 import '../models/api_error_model.dart';

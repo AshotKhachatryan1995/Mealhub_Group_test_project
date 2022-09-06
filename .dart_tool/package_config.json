@@ -446,13 +446,13 @@
       "languageVersion": "2.12"
     },
     {
-      "name": "mealhub_group_test_project",
+      "name": "users_list_with_details_and_carousel",
       "rootUri": "../",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     }
   ],
-  "generated": "2022-09-06T16:34:53.971384Z",
+  "generated": "2022-09-06T17:08:52.343658Z",
   "generator": "pub",
   "generatorVersion": "2.18.0"
 }

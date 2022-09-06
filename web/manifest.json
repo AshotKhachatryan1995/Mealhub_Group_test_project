@@ -1,6 +1,6 @@
 {
-    "name": "mealhub_group_test_project",
-    "short_name": "mealhub_group_test_project",
+    "name": "users_list_with_details_and_carousel",
+    "short_name": "users_list_with_details_and_carousel",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

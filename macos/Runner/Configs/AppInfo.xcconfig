@@ -5,7 +5,7 @@
 // 'flutter create' template.
 
 // The application's name. By default this is also the title of the Flutter window.
-PRODUCT_NAME = mealhub_group_test_project
+PRODUCT_NAME = users_list_with_details_and_carousel
 
 // The application's bundle identifier
 PRODUCT_BUNDLE_IDENTIFIER = com.example.flTestProject

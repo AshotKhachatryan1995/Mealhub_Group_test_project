@@ -1,4 +1,4 @@
-# mealhub_group_test_project
+# users_list_with_details_and_carousel
 
 A new Flutter project.
 

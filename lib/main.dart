@@ -1,9 +1,9 @@
-import 'package:mealhub_group_test_project/blocs/navigation_bloc/navigation_bloc.dart';
-import 'package:mealhub_group_test_project/blocs/navigation_bloc/navigation_event.dart';
-import 'package:mealhub_group_test_project/blocs/navigation_bloc/navigation_state.dart';
-import 'package:mealhub_group_test_project/middleware/notifiers/posts_notifier.dart';
-import 'package:mealhub_group_test_project/screens/home_screen.dart';
-import 'package:mealhub_group_test_project/screens/loading_screen.dart';
+import 'package:users_list_with_details_and_carousel/blocs/navigation_bloc/navigation_bloc.dart';
+import 'package:users_list_with_details_and_carousel/blocs/navigation_bloc/navigation_event.dart';
+import 'package:users_list_with_details_and_carousel/blocs/navigation_bloc/navigation_state.dart';
+import 'package:users_list_with_details_and_carousel/middleware/notifiers/posts_notifier.dart';
+import 'package:users_list_with_details_and_carousel/screens/home_screen.dart';
+import 'package:users_list_with_details_and_carousel/screens/loading_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';

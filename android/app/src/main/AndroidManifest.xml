@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.mealhub_group_test_project">
+    package="com.example.users_list_with_details_and_carousel">
    <application
-        android:label="mealhub_group_test_project"
+        android:label="users_list_with_details_and_carousel"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
