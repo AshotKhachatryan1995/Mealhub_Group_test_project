@@ -57,7 +57,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _renderPostItem(Post post) {
-    Widget _renderPostDetails() {
+    Widget renderPostDetails() {
       return Flexible(
           child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -87,7 +87,7 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Row(children: [
               _renderImageArea(),
               const SizedBox(width: 20),
-              _renderPostDetails()
+              renderPostDetails()
             ])));
   }
 

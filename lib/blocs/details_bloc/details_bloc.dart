@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mealhub_group_test_project/middleware/models/photo.dart';
 
 import '../../middleware/models/api_error_model.dart';
 import '../../middleware/models/user.dart';
@@ -10,6 +11,7 @@ class DetailsBloc extends Bloc<DetailsEvent, DetailsState> {
   DetailsBloc(this._apiRepositoryImpl) : super(InitialState()) {
     on<LoadUserEvent>(_onLoadUserEvent);
     on<LoadPhotosEvent>(_onLoadPhotosEvent);
+    on<SaveDetailsEvent>(_onSaveDetailsEvent);
   }
 
   final ApiRepositoryImpl _apiRepositoryImpl;
@@ -37,10 +39,29 @@ class DetailsBloc extends Bloc<DetailsEvent, DetailsState> {
     final result = await _apiRepositoryImpl.getPhotos();
 
     if (result is ApiErrorModel) {
+      emit(PhotosNotLoadedState());
       throw Exception(
           'Message is ${result.errorMessage} and code is ${result.errorCode}');
     }
 
-    if (result is User) {}
+    if (result is List<Photo>) {
+      emit(PhotosLoadedState(photos: result));
+    }
+  }
+
+  Future<void> _onSaveDetailsEvent(
+      SaveDetailsEvent event, Emitter<DetailsState> emit) async {
+    emit(LoadingState());
+    final result = await _apiRepositoryImpl.saveDetails(user: event.user);
+
+    if (result is ApiErrorModel) {
+      emit(UserDataNotSavedState());
+      throw Exception(
+          'Message is ${result.errorMessage} and code is ${result.errorCode}');
+    }
+
+    if (result is bool) {
+      emit(UserDetailsSavedState());
+    }
   }
 }

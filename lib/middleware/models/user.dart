@@ -25,4 +25,5 @@ class User {
   final Company company;
 
   factory User.fromJson(Map<String, dynamic> data) => _$UserFromJson(data);
+  Map<String, dynamic> toJson() => _$UserToJson(this);
 }

@@ -9,4 +9,5 @@ class Geo {
   final String lng;
 
   factory Geo.fromJson(Map<String, dynamic> data) => _$GeoFromJson(data);
+  Map<String, dynamic> toJson() => _$GeoToJson(this);
 }

@@ -5,4 +5,5 @@ class AppUrls {
   static const String postsUrl = '/posts';
   static const String usersUrl = '/users/1';
   static const String photosUrl = '/photos/';
+  static const String saveDataUrl = '/saveDataUrl/';
 }
