@@ -120,7 +120,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                       ? Align(
                           alignment: Alignment.bottomCenter,
                           child: TextButton(
-                              onPressed: () {},
+                              onPressed: _onSaveDetails,
                               child: Container(
                                 padding: const EdgeInsets.all(10),
                                 decoration: BoxDecoration(
@@ -137,9 +137,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
       {required String rowName, required TextEditingController controller}) {
     return Row(children: [
       Text('$rowName: '),
-      const SizedBox(
-        width: 20,
-      ),
+      const SizedBox(width: 20),
       Expanded(
           child: ValueListenableBuilder(
               valueListenable: _isEditMode,
@@ -164,5 +162,9 @@ extension _DetailsScreenStateAddition on _DetailsScreenState {
     _phoneController.text = _user?.phone ?? '';
     _locationController.text =
         (_user?.address.city ?? '') + (_user?.address.street ?? '');
+  }
+
+  void _onSaveDetails() {
+    _detailsBloc.add(SaveDetailsEvent());
   }
 }
