@@ -21,6 +21,8 @@ class _DetailsScreenState extends State<DetailsScreen> {
   final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _locationController = TextEditingController();
 
+  final ValueNotifier<bool> _isEditMode = ValueNotifier(false);
+
   @override
   void initState() {
     super.initState();
@@ -30,6 +32,11 @@ class _DetailsScreenState extends State<DetailsScreen> {
   @override
   void dispose() {
     _detailsBloc.close();
+    _nameController.dispose();
+    _emailController.dispose();
+    _phoneController.dispose();
+    _locationController.dispose();
+    _isEditMode.dispose();
     super.dispose();
   }
 
@@ -64,10 +71,27 @@ class _DetailsScreenState extends State<DetailsScreen> {
   }
 
   Widget _renderEditIcon() {
-    return GestureDetector(
-        onTap: _onEditTap,
-        child: const Padding(
-            padding: EdgeInsets.only(right: 20), child: Icon(Icons.edit)));
+    return ValueListenableBuilder(
+        valueListenable: _isEditMode,
+        builder: (context, bool isEditMode, child) {
+          return GestureDetector(
+              onTap: _onEditTap,
+              child: Container(
+                  margin: const EdgeInsets.only(right: 10),
+                  padding: const EdgeInsets.all(10),
+                  decoration: isEditMode
+                      ? BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          boxShadow: [
+                              BoxShadow(
+                                  color: Colors.black.withOpacity(0.05),
+                                  spreadRadius: 2,
+                                  offset: const Offset(-2, -2),
+                                  blurRadius: 1)
+                            ])
+                      : null,
+                  child: const Icon(Icons.edit)));
+        });
   }
 
   Widget _renderDeatils({required User user}) {
@@ -78,63 +102,62 @@ class _DetailsScreenState extends State<DetailsScreen> {
 
     return Padding(
         padding: const EdgeInsets.all(20),
-        child: Column(children: [
-          Row(children: [
-            const Text('Name: '),
-            const SizedBox(
-              width: 20,
-            ),
-            _renderName()
+        child: Stack(children: [
+          Column(children: [
+            Row(children: [
+              const Text('Name: '),
+              const SizedBox(
+                width: 20,
+              ),
+              _renderTextField(_nameController)
+            ]),
+            Row(children: [
+              const Text('Email: '),
+              const SizedBox(width: 20),
+              _renderTextField(_emailController)
+            ]),
+            Row(children: [
+              const Text('Phone: '),
+              const SizedBox(width: 20),
+              _renderTextField(_phoneController)
+            ]),
+            Row(children: [
+              const Text('Location: '),
+              const SizedBox(width: 20),
+              _renderTextField(_locationController)
+            ]),
           ]),
-          Row(children: [
-            const Text('Email: '),
-            const SizedBox(width: 20),
-            _renderEmail()
-          ]),
-          Row(children: [
-            const Text('Phone: '),
-            const SizedBox(width: 20),
-            _renderPhone()
-          ]),
-          Row(children: [
-            const Text('Location: '),
-            const SizedBox(width: 20),
-            _renderLocation()
-          ]),
+          Positioned.fill(
+              child: ValueListenableBuilder(
+                  valueListenable: _isEditMode,
+                  builder: (context, bool isEditMode, child) => isEditMode
+                      ? Align(
+                          alignment: Alignment.bottomCenter,
+                          child: TextButton(
+                              onPressed: () {},
+                              child: Container(
+                                padding: const EdgeInsets.all(10),
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    color: Colors.grey),
+                                child: const Text('Save Changes',
+                                    style: TextStyle(color: Colors.white)),
+                              )))
+                      : const SizedBox()))
         ]));
   }
 
-  Widget _renderName() {
+  Widget _renderTextField(TextEditingController controller) {
     return Expanded(
-        child: TextFormField(
-            controller: _nameController,
-            readOnly: true,
-            decoration: const InputDecoration(border: InputBorder.none)));
+        child: ValueListenableBuilder(
+            valueListenable: _isEditMode,
+            builder: (context, bool isEditMode, child) => TextFormField(
+                controller: controller,
+                readOnly: !isEditMode,
+                decoration: const InputDecoration(border: InputBorder.none))));
   }
 
-  Widget _renderEmail() {
-    return Expanded(
-        child: TextFormField(
-            controller: _emailController,
-            readOnly: true,
-            decoration: const InputDecoration(border: InputBorder.none)));
+  void _onEditTap() {
+    _isEditMode.value = !_isEditMode.value;
   }
-
-  Widget _renderPhone() {
-    return Expanded(
-        child: TextFormField(
-            controller: _phoneController,
-            readOnly: true,
-            decoration: const InputDecoration(border: InputBorder.none)));
-  }
-
-  Widget _renderLocation() {
-    return Expanded(
-        child: TextFormField(
-            controller: _locationController,
-            readOnly: true,
-            decoration: const InputDecoration(border: InputBorder.none)));
-  }
-
-  void _onEditTap() {}
 }
