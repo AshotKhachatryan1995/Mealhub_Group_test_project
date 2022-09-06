@@ -2,7 +2,7 @@
 
 This project created in flutter with BLoC state managment. This project supports both Android and IOS, clone the branches mentioned below:
 
-https://github.com/AshotKhachatryan1995/Mealhub_Group_test_project/main (stable channel)
+https://github.com/AshotKhachatryan1995/users_list_with_details_and_carousel/main (stable channel)
 
 Getting Started 
 
@@ -12,7 +12,7 @@ How to Use Step 1:
 
 Download or clone this repo by using the link below:
 
-https://github.com/AshotKhachatryan1995/Mealhub_Group_test_project.git
+https://github.com/AshotKhachatryan1995/users_list_with_details_and_carousel.git
 
 Go to project root and execute the following command in console to get the required dependencies:
 
