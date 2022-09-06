@@ -29,7 +29,9 @@ class _DetailsScreenState extends State<DetailsScreen> {
   @override
   void initState() {
     super.initState();
-    _detailsBloc = DetailsBloc(ApiRepositoryImpl())..add(LoadUserEvent());
+    _detailsBloc = DetailsBloc(ApiRepositoryImpl())
+      ..add(LoadUserEvent())
+      ..add(LoadPhotosEvent());
   }
 
   @override
@@ -166,6 +168,31 @@ extension _DetailsScreenStateAddition on _DetailsScreenState {
   }
 
   void _onSaveDetails() {
-    // _detailsBloc.add(const SaveDetailsEvent());
+    _isEditMode.value = false;
+    final user = _user;
+
+    if (user != null) {
+      _detailsBloc.add(SaveDetailsEvent(
+          user: user.userFromController(
+              nameOfUser: _nameController.text,
+              emailOfUser: _emailController.text,
+              phoneOfUser: _phoneController.text)));
+    }
   }
+}
+
+extension _UserAddition on User {
+  User userFromController(
+          {required String nameOfUser,
+          required String emailOfUser,
+          required String phoneOfUser}) =>
+      User(
+          id: id,
+          name: nameOfUser,
+          username: username,
+          email: emailOfUser,
+          address: address,
+          phone: phoneOfUser,
+          website: website,
+          company: company);
 }

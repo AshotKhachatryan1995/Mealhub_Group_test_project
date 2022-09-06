@@ -9,6 +9,7 @@ import 'details_state.dart';
 class DetailsBloc extends Bloc<DetailsEvent, DetailsState> {
   DetailsBloc(this._apiRepositoryImpl) : super(InitialState()) {
     on<LoadUserEvent>(_onLoadUserEvent);
+    on<LoadPhotosEvent>(_onLoadPhotosEvent);
   }
 
   final ApiRepositoryImpl _apiRepositoryImpl;
@@ -28,5 +29,18 @@ class DetailsBloc extends Bloc<DetailsEvent, DetailsState> {
     if (result is User) {
       emit(UserLoadedState(user: result));
     }
+  }
+
+  Future<void> _onLoadPhotosEvent(
+      LoadPhotosEvent event, Emitter<DetailsState> emit) async {
+    emit(LoadingState());
+    final result = await _apiRepositoryImpl.getPhotos();
+
+    if (result is ApiErrorModel) {
+      throw Exception(
+          'Message is ${result.errorMessage} and code is ${result.errorCode}');
+    }
+
+    if (result is User) {}
   }
 }

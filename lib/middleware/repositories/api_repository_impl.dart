@@ -10,7 +10,23 @@ import 'api_repository.dart';
 
 class ApiRepositoryImpl implements ApiRepository {
   @override
-  Future<dynamic> getPhotos() async {}
+  Future<dynamic> getPhotos() async {
+    try {
+      final response =
+          await http.get(Uri.parse(AppUrls.baseUrl + AppUrls.photosUrl));
+      if (response.statusCode == 200) {
+        // final result = jsonDecode(response.body);
+        // final user = User.fromJson(result);
+
+        // return user;
+      } else {
+        return ApiErrorModel(
+            errorCode: response.statusCode, errorMessage: response.toString());
+      }
+    } catch (e) {
+      return ApiErrorModel(errorCode: 400, errorMessage: e.toString());
+    }
+  }
 
   @override
   Future<dynamic> getPosts() async {
