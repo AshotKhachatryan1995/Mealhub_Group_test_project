@@ -1,13 +1,14 @@
-import 'package:mealhub_group_test_project/blocs/home_bloc/home_bloc.dart';
-import 'package:mealhub_group_test_project/blocs/home_bloc/home_event.dart';
-import 'package:mealhub_group_test_project/blocs/home_bloc/home_state.dart';
-import 'package:mealhub_group_test_project/middleware/models/post.dart';
-import 'package:mealhub_group_test_project/middleware/notifiers/posts_notifier.dart';
-import 'package:mealhub_group_test_project/middleware/repositories/api_repository_impl.dart';
-import 'package:mealhub_group_test_project/screens/details_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
+
+import '../blocs/home_bloc/home_bloc.dart';
+import '../blocs/home_bloc/home_event.dart';
+import '../blocs/home_bloc/home_state.dart';
+import '../middleware/models/post.dart';
+import '../middleware/notifiers/posts_notifier.dart';
+import '../middleware/repositories/api_repository_impl.dart';
+import 'details_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);

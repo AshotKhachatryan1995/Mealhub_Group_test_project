@@ -1,9 +1,10 @@
-import 'package:mealhub_group_test_project/blocs/home_bloc/home_event.dart';
-import 'package:mealhub_group_test_project/blocs/home_bloc/home_state.dart';
-import 'package:mealhub_group_test_project/middleware/models/api_error_model.dart';
-import 'package:mealhub_group_test_project/middleware/models/post.dart';
-import 'package:mealhub_group_test_project/middleware/repositories/api_repository_impl.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../middleware/models/api_error_model.dart';
+import '../../middleware/models/post.dart';
+import '../../middleware/repositories/api_repository_impl.dart';
+import 'home_event.dart';
+import 'home_state.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
   HomeBloc(this._apiRepositoryImpl) : super(InitialState()) {

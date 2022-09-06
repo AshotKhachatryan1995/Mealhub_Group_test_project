@@ -1,11 +1,12 @@
 import 'dart:convert';
 
-import 'package:mealhub_group_test_project/middleware/constants/app_urls.dart';
-import 'package:mealhub_group_test_project/middleware/models/api_error_model.dart';
-import 'package:mealhub_group_test_project/middleware/models/post.dart';
-import 'package:mealhub_group_test_project/middleware/models/user.dart';
-import 'package:mealhub_group_test_project/middleware/repositories/api_repository.dart';
 import 'package:http/http.dart' as http;
+
+import '../constants/app_urls.dart';
+import '../models/api_error_model.dart';
+import '../models/post.dart';
+import '../models/user.dart';
+import 'api_repository.dart';
 
 class ApiRepositoryImpl implements ApiRepository {
   @override

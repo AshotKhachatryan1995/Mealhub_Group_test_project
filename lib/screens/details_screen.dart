@@ -1,11 +1,12 @@
-import 'package:mealhub_group_test_project/blocs/details_bloc/details_bloc.dart';
-import 'package:mealhub_group_test_project/blocs/details_bloc/details_event.dart';
-import 'package:mealhub_group_test_project/blocs/details_bloc/details_state.dart';
-import 'package:mealhub_group_test_project/middleware/models/user.dart';
-import 'package:mealhub_group_test_project/middleware/repositories/api_repository_impl.dart';
-import 'package:mealhub_group_test_project/shared/navigation_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../blocs/details_bloc/details_bloc.dart';
+import '../blocs/details_bloc/details_event.dart';
+import '../blocs/details_bloc/details_state.dart';
+import '../middleware/models/user.dart';
+import '../middleware/repositories/api_repository_impl.dart';
+import '../shared/navigation_widget.dart';
 
 class DetailsScreen extends StatefulWidget {
   const DetailsScreen({Key? key}) : super(key: key);
@@ -165,6 +166,6 @@ extension _DetailsScreenStateAddition on _DetailsScreenState {
   }
 
   void _onSaveDetails() {
-    _detailsBloc.add(SaveDetailsEvent());
+    _detailsBloc.add(const SaveDetailsEvent());
   }
 }

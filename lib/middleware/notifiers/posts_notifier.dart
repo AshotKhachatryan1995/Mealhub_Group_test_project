@@ -1,5 +1,6 @@
-import 'package:mealhub_group_test_project/middleware/models/post.dart';
 import 'package:flutter/material.dart';
+
+import '../models/post.dart';
 
 class PostsNotifier extends ChangeNotifier {
   List<Post> _posts = [];

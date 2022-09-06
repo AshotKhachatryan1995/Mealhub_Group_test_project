@@ -1,5 +1,6 @@
-import 'package:mealhub_group_test_project/middleware/models/geo.dart';
 import 'package:json_annotation/json_annotation.dart';
+
+import 'geo.dart';
 part 'address.g.dart';
 
 @JsonSerializable()
