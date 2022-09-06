@@ -23,6 +23,8 @@ class _DetailsScreenState extends State<DetailsScreen> {
 
   final ValueNotifier<bool> _isEditMode = ValueNotifier(false);
 
+  User? _user;
+
   @override
   void initState() {
     super.initState();
@@ -95,6 +97,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
   }
 
   Widget _renderDeatils({required User user}) {
+    _user = user;
     _nameController.text = user.name;
     _emailController.text = user.email;
     _phoneController.text = user.phone;
@@ -104,28 +107,11 @@ class _DetailsScreenState extends State<DetailsScreen> {
         padding: const EdgeInsets.all(20),
         child: Stack(children: [
           Column(children: [
-            Row(children: [
-              const Text('Name: '),
-              const SizedBox(
-                width: 20,
-              ),
-              _renderTextField(_nameController)
-            ]),
-            Row(children: [
-              const Text('Email: '),
-              const SizedBox(width: 20),
-              _renderTextField(_emailController)
-            ]),
-            Row(children: [
-              const Text('Phone: '),
-              const SizedBox(width: 20),
-              _renderTextField(_phoneController)
-            ]),
-            Row(children: [
-              const Text('Location: '),
-              const SizedBox(width: 20),
-              _renderTextField(_locationController)
-            ]),
+            _renderDetailsItem(rowName: 'Name', controller: _nameController),
+            _renderDetailsItem(rowName: 'Email', controller: _emailController),
+            _renderDetailsItem(rowName: 'Phone', controller: _phoneController),
+            _renderDetailsItem(
+                rowName: 'Location', controller: _locationController),
           ]),
           Positioned.fill(
               child: ValueListenableBuilder(
@@ -147,17 +133,36 @@ class _DetailsScreenState extends State<DetailsScreen> {
         ]));
   }
 
-  Widget _renderTextField(TextEditingController controller) {
-    return Expanded(
-        child: ValueListenableBuilder(
-            valueListenable: _isEditMode,
-            builder: (context, bool isEditMode, child) => TextFormField(
-                controller: controller,
-                readOnly: !isEditMode,
-                decoration: const InputDecoration(border: InputBorder.none))));
+  Widget _renderDetailsItem(
+      {required String rowName, required TextEditingController controller}) {
+    return Row(children: [
+      Text('$rowName: '),
+      const SizedBox(
+        width: 20,
+      ),
+      Expanded(
+          child: ValueListenableBuilder(
+              valueListenable: _isEditMode,
+              builder: (context, bool isEditMode, child) => TextFormField(
+                  controller: controller,
+                  readOnly: !isEditMode,
+                  decoration: const InputDecoration(border: InputBorder.none))))
+    ]);
   }
+}
 
+extension _DetailsScreenStateAddition on _DetailsScreenState {
   void _onEditTap() {
     _isEditMode.value = !_isEditMode.value;
+
+    _resetDetails();
+  }
+
+  void _resetDetails() {
+    _nameController.text = _user?.name ?? '';
+    _emailController.text = _user?.email ?? '';
+    _phoneController.text = _user?.phone ?? '';
+    _locationController.text =
+        (_user?.address.city ?? '') + (_user?.address.street ?? '');
   }
 }
