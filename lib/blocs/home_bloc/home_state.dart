@@ -1,5 +1,6 @@
-import 'package:mealhub_group_test_project/middleware/models/post.dart';
 import 'package:equatable/equatable.dart';
+
+import '../../middleware/models/post.dart';
 
 abstract class HomeState extends Equatable {
   const HomeState();

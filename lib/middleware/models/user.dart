@@ -1,6 +1,7 @@
-import 'package:mealhub_group_test_project/middleware/models/address.dart';
-import 'package:mealhub_group_test_project/middleware/models/company.dart';
 import 'package:json_annotation/json_annotation.dart';
+
+import 'address.dart';
+import 'company.dart';
 part 'user.g.dart';
 
 @JsonSerializable()

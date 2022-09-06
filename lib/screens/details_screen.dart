@@ -166,6 +166,6 @@ extension _DetailsScreenStateAddition on _DetailsScreenState {
   }
 
   void _onSaveDetails() {
-    _detailsBloc.add(const SaveDetailsEvent());
+    // _detailsBloc.add(const SaveDetailsEvent());
   }
 }
