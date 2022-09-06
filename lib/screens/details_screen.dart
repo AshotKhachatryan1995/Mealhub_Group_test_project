@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../blocs/details_bloc/details_bloc.dart';
 import '../blocs/details_bloc/details_event.dart';
 import '../blocs/details_bloc/details_state.dart';
+import '../middleware/models/photo.dart';
 import '../middleware/models/user.dart';
 import '../middleware/repositories/api_repository_impl.dart';
 import '../shared/navigation_widget.dart';
@@ -30,9 +31,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
   @override
   void initState() {
     super.initState();
-    _detailsBloc = DetailsBloc(ApiRepositoryImpl())
-      ..add(LoadUserEvent())
-      ..add(LoadPhotosEvent());
+    _detailsBloc = DetailsBloc(ApiRepositoryImpl())..add(LoadUserEvent());
   }
 
   @override
@@ -61,7 +60,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
   Widget _render() {
     return BlocBuilder<DetailsBloc, DetailsState>(builder: (context, state) {
       if (state is UserLoadedState) {
-        return _renderDeatils(user: state.user);
+        return _renderDeatils(user: state.user, photos: state.photos);
       }
 
       if (state is UserNotLoadedState) {
@@ -100,7 +99,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
         });
   }
 
-  Widget _renderDeatils({required User user}) {
+  Widget _renderDeatils({required User user, required List<Photo> photos}) {
     _user = user;
     _nameController.text = user.name;
     _emailController.text = user.email;
@@ -117,7 +116,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
             _renderDetailsItem(
                 rowName: 'Location', controller: _locationController),
           ]),
-          _renderPhotoCarousel(),
+          _renderPhotoCarousel(photos: photos),
           Positioned.fill(
               child: ValueListenableBuilder(
                   valueListenable: _isEditMode,
@@ -153,22 +152,18 @@ class _DetailsScreenState extends State<DetailsScreen> {
     ]);
   }
 
-  Widget _renderPhotoCarousel() {
+  Widget _renderPhotoCarousel({required List<Photo> photos}) {
     return Positioned.fill(
         child: Align(
             child: CarouselSlider(
       options: CarouselOptions(height: 200.0),
-      items: [1, 2, 3, 4, 5].map((i) {
+      items: photos.map((photo) {
         return Builder(
           builder: (BuildContext context) {
             return Container(
                 width: MediaQuery.of(context).size.width,
                 margin: const EdgeInsets.symmetric(horizontal: 5.0),
-                decoration: const BoxDecoration(color: Colors.amber),
-                child: Text(
-                  'text $i',
-                  style: const TextStyle(fontSize: 16.0),
-                ));
+                child: Image.network(photo.url, fit: BoxFit.contain));
           },
         );
       }).toList(),

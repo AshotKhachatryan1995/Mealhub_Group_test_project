@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mealhub_group_test_project/middleware/models/photo.dart';
 
 import '../../middleware/models/api_error_model.dart';
+import '../../middleware/models/photo.dart';
 import '../../middleware/models/user.dart';
 import '../../middleware/repositories/api_repository_impl.dart';
 import 'details_event.dart';
@@ -10,7 +10,6 @@ import 'details_state.dart';
 class DetailsBloc extends Bloc<DetailsEvent, DetailsState> {
   DetailsBloc(this._apiRepositoryImpl) : super(InitialState()) {
     on<LoadUserEvent>(_onLoadUserEvent);
-    on<LoadPhotosEvent>(_onLoadPhotosEvent);
     on<SaveDetailsEvent>(_onSaveDetailsEvent);
   }
 
@@ -19,33 +18,25 @@ class DetailsBloc extends Bloc<DetailsEvent, DetailsState> {
   Future<void> _onLoadUserEvent(
       LoadUserEvent event, Emitter<DetailsState> emit) async {
     emit(LoadingState());
-    final result = await _apiRepositoryImpl.getUser();
+    final userResult = await _apiRepositoryImpl.getUser();
+    final photoResult = await _apiRepositoryImpl.getPhotos();
 
-    if (result is ApiErrorModel) {
+    if (userResult is ApiErrorModel) {
       emit(UserNotLoadedState());
 
       throw Exception(
-          'Message is ${result.errorMessage} and code is ${result.errorCode}');
+          'Message is ${userResult.errorMessage} and code is ${userResult.errorCode}');
     }
 
-    if (result is User) {
-      emit(UserLoadedState(user: result));
-    }
-  }
+    if (photoResult is ApiErrorModel) {
+      emit(UserNotLoadedState());
 
-  Future<void> _onLoadPhotosEvent(
-      LoadPhotosEvent event, Emitter<DetailsState> emit) async {
-    emit(LoadingState());
-    final result = await _apiRepositoryImpl.getPhotos();
-
-    if (result is ApiErrorModel) {
-      emit(PhotosNotLoadedState());
       throw Exception(
-          'Message is ${result.errorMessage} and code is ${result.errorCode}');
+          'Message is ${userResult.errorMessage} and code is ${userResult.errorCode}');
     }
 
-    if (result is List<Photo>) {
-      emit(PhotosLoadedState(photos: result));
+    if (userResult is User && photoResult is List<Photo>) {
+      emit(UserLoadedState(user: userResult, photos: photoResult));
     }
   }
 

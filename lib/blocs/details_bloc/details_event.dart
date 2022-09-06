@@ -19,11 +19,6 @@ class LoadUserEvent extends DetailsEvent {
   List<Object> get props => [];
 }
 
-class LoadPhotosEvent extends DetailsEvent {
-  @override
-  List<Object> get props => [];
-}
-
 class SaveDetailsEvent extends DetailsEvent {
   const SaveDetailsEvent({required this.user});
   final User user;

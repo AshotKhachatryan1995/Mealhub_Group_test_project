@@ -26,24 +26,17 @@ class UserNotLoadedState extends DetailsState {
 }
 
 class UserLoadedState extends DetailsState {
-  const UserLoadedState({required this.user});
+  const UserLoadedState({required this.user, required this.photos});
   final User user;
+  final List<Photo> photos;
 
   @override
-  List<Object> get props => [user];
+  List<Object> get props => [user, photos];
 }
 
 class UserDetailsSavedState extends DetailsState {
   @override
   List<Object> get props => [];
-}
-
-class PhotosLoadedState extends DetailsState {
-  const PhotosLoadedState({required this.photos});
-  final List<Photo> photos;
-
-  @override
-  List<Object> get props => [photos];
 }
 
 class UserDataNotSavedState extends DetailsState {
