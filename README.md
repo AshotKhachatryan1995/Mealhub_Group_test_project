@@ -30,6 +30,7 @@ flutter packages pub run build_runner watch Hide Generated Files In-order to hid
 **/*.g.dart
 
 Flutter 3.3.0(channel stable)
+
 Dart 2.18.0
 
 Conclusion I will be happy to answer any questions that you may have on this approach, for any collaboration feel free to write me. (Ashot199514@gmail.com) 🙂
